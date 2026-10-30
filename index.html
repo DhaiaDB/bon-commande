@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bon de commande Theraplos – Pharmacie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4f6fa;--card:#fff;--ink:#1b2a5a;--mute:#5d6a8c;--line:#dde2ee;--navy:#1b2a5a;--teal:#2fb590;--tealsoft:#e1f5ee;--red:#d6283a;--warn:#fff1f1;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1530;--card:#18204a;--ink:#eef1fb;--mute:#9aa6cc;--line:#2b3566;--navy:#0b1130;--tealsoft:#123b39;--red:#ff6b7a;--warn:#3a1c2a}}
+:root[data-theme="dark"]{--bg:#0f1530;--card:#18204a;--ink:#eef1fb;--mute:#9aa6cc;--line:#2b3566;--navy:#0b1130;--tealsoft:#123b39;--red:#ff6b7a;--warn:#3a1c2a}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Poppins,system-ui,sans-serif;font-size:14px;line-height:1.45}
+header{background:var(--navy);color:#fff;padding:18px 16px 14px;border-bottom:4px solid var(--teal)}
+header h1{margin:0;font-size:19px;font-weight:700}
+header p{margin:2px 0 0;font-size:12px;opacity:.8}
+main{max-width:980px;margin:0 auto;padding:14px 12px 120px}
+.info{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px}
+label.f{display:block;font-size:12px;color:var(--mute);font-weight:500}
+input[type=text],input[type=tel],input[type=search],input[type=date],input[type=password],textarea{width:100%;margin-top:3px;padding:9px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:inherit}
+input:focus,button:focus-visible,select:focus{outline:2px solid var(--teal);outline-offset:1px}
+.bar{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 10px;align-items:center}
+.bar input{flex:1 1 200px;margin:0}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:7px 12px;border-radius:99px;font:inherit;font-size:13px;cursor:pointer}
+.chip[aria-pressed=true]{background:var(--teal);border-color:var(--teal);color:#08281f;font-weight:600}
+.item{display:grid;grid-template-columns:1fr auto;gap:8px 12px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:11px 12px;margin-bottom:8px}
+.item.on{border-color:var(--teal);box-shadow:inset 4px 0 0 var(--teal)}
+.name{font-weight:600;font-size:13.5px}
+.dci{font-size:12px;color:var(--mute)}
+.meta{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px;color:var(--mute)}
+.meta b{color:var(--ink);font-weight:600}
+.ug{color:var(--red);font-weight:700}
+.tag{font-size:11px;font-weight:600;padding:2px 8px;border-radius:99px;margin-left:6px;white-space:nowrap}
+.d{background:var(--tealsoft);color:#12806a}
+.n{background:var(--warn);color:var(--red)}
+.q{display:flex;align-items:center;gap:4px;align-self:start}
+.q button{width:36px;height:36px;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:8px;font-size:18px;cursor:pointer}
+.q input{width:56px;text-align:center;margin:0;padding:8px 2px;font-weight:600;font-size:15px}
+.free{grid-column:1/-1;font-size:12px;color:#12806a;font-weight:500}
+.foot{position:fixed;left:0;right:0;bottom:0;background:var(--navy);color:#fff;padding:10px 14px calc(10px + env(safe-area-inset-bottom,0px));display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;justify-content:space-between;border-top:3px solid var(--teal)}
+.foot .t{font-size:12px;opacity:.85}.foot .t b{display:block;font-size:16px;opacity:1}
+.acts{display:flex;gap:6px;flex-wrap:wrap}
+.btn{border:0;border-radius:8px;padding:9px 13px;font:inherit;font-weight:600;font-size:13px;cursor:pointer;background:var(--teal);color:#08281f}
+.btn.g{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.4)}
+.note{font-size:12px;color:var(--mute);margin:12px 2px}
+.empty{text-align:center;color:var(--mute);padding:30px}
+#sheet{display:none}
+@media print{
+ body{background:#fff;color:#000}body>*:not(#sheet){display:none!important}
+ #sheet{display:block;padding:10px;font-size:11px}
+ #sheet table{width:100%;border-collapse:collapse}#sheet td,#sheet th{border:1px solid #000;padding:3px 5px;text-align:left}
+ #sheet th{background:#1b2a5a;color:#fff}
+}
+.tabs{display:flex;gap:6px;margin:0 0 12px}
+body.h .info,body.h .bar,body.h #list,body.h .note,body.h .foot{display:none}
+body:not(.h) #hist{display:none}
+.hbar{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 10px}.hbar input{flex:1 1 180px;margin:0}
+select{padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:inherit;max-width:100%}
+dialog{background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:12px;width:92%;max-width:420px;padding:16px}
+dialog::backdrop{background:rgba(5,10,30,.6)}
+#cv{width:100%;height:auto;aspect-ratio:360/140;border:1.5px dashed var(--mute);border-radius:8px;background:#fff;touch-action:none;display:block;margin:8px 0}
+.dact{display:flex;gap:8px;justify-content:flex-end;margin-top:12px}.dact .btn.g{color:var(--ink);border-color:var(--line)}
+.chk{display:flex;gap:8px;font-size:12px;align-items:flex-start;margin-top:6px}.chk input{margin-top:3px}
+#derr{color:var(--red);font-size:12px;min-height:16px;margin-top:6px}
+#toast{position:fixed;left:50%;top:calc(12px + env(safe-area-inset-top,0px));transform:translate(-50%,-150%);background:var(--navy);color:#fff;padding:10px 16px;border-radius:10px;border:1px solid var(--teal);font-size:13px;z-index:99;max-width:92%;transition:transform .25s}
+#toast.on{transform:translate(-50%,0)}
+@media (prefers-reduced-motion:reduce){#toast{transition:none}}
+[hidden]{display:none!important}
+.lg{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px;display:grid;gap:10px}
+#lerr{color:var(--red);font-size:12px;min-height:16px}
+textarea{resize:vertical;font:inherit}
+.shr{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.shr .btn{text-decoration:none;display:inline-block}
+@media print{@page{size:A4;margin:8mm}
+ #sheet{font-size:8.5px;-webkit-print-color-adjust:exact;print-color-adjust:exact;color:#111;padding:0}
+ #sheet .hd{background:#1b2a5a;color:#fff;padding:8px 12px;border-bottom:4px solid #3cc09b;border-radius:0 0 0 24px}
+ #sheet .lg1{font-size:18px}#sheet small{color:#3cc09b;font-size:8px}#sheet .sm{font-size:8px;margin-top:3px}
+ #sheet h2{margin:8px auto;border:1.5px solid #3cc09b;border-radius:10px;padding:5px;text-align:center;font-size:13px;color:#1b2a5a;width:80%}#sheet h2 span{color:#3cc09b}
+ #sheet .gr{display:grid;grid-template-columns:1fr 1fr;gap:1px 16px;margin:6px 0}#sheet .gr span{color:#555}
+ #sheet th{background:#1b2a5a;color:#fff;font-size:7.5px;text-align:center}#sheet td{text-align:center;font-weight:600;padding:2px 3px}#sheet td.l{text-align:left}
+ #sheet tr.q td{background:#e1f5ee}#sheet .ug{color:#d6283a}#sheet .qt{font-size:11px}
+ #sheet .tt{font-weight:700;color:#1b2a5a;font-size:10px;margin:6px 0}
+ #sheet .sg{display:flex;gap:12px;border:1.5px solid #3cc09b;border-radius:6px;padding:6px;align-items:center;width:fit-content;max-width:100%}
+ #sheet .sg img{height:60px;background:#fff}#sheet .hs{font:7px monospace;word-break:break-all}}
+</style>
+</head>
+<body>
+<header><h1>Listing Theraplos – Pharmacie</h1><p>Bon de commande · liste du 29/10/2026 · Zone Industrielle le Rhumel N° 328, Constantine</p></header>
+<main>
+ <div class="tabs"><button class="chip" id="t1" aria-pressed="true">Nouvelle commande</button><button class="chip" id="t2" aria-pressed="false">Historique</button><button class="chip" id="t3">Envoyer l’interface</button></div>
+ <section class="info" aria-label="Informations client">
+  <label class="f">Pharmacie (client)<input type="text" id="client" autocomplete="organization"></label>
+  <label class="f">Nom du pharmacien<input type="text" id="ph" autocomplete="name"></label>
+  <label class="f">Région<input type="text" id="region"></label>
+  <label class="f">Téléphone<input type="tel" id="tel" autocomplete="tel"></label>
+  <label class="f">Commercial (délégué médico-pharmaceutique)<input type="text" id="comm" value="Dr BENGHALEM Mohammed Dhiya Eddine"></label>
+  <label class="f">Tél. du commercial<input type="tel" id="dtel" value="0770 31 83 49"></label>
+  <label class="f">Grossiste<input type="text" id="gros"></label>
+  <label class="f">Tél. du grossiste<input type="tel" id="gtel"></label>
+  <label class="f">Date du bon de commande<input type="date" id="dt"></label>
+ </section>
+ <div class="bar">
+  <input type="search" id="s" placeholder="Rechercher un produit ou une DCI…" aria-label="Rechercher">
+  <div class="chips" role="group" aria-label="Filtres">
+   <button class="chip" data-f="all" aria-pressed="true">Tous</button>
+   <button class="chip" data-f="D" aria-pressed="false">Disponibles</button>
+   <button class="chip" data-f="sel" aria-pressed="false">Ma commande</button>
+  </div>
+ </div>
+ <div id="list"></div>
+ <p class="note">Les UG (unités gratuites) sont estimées à partir du pourcentage indiqué sur le listing : à confirmer avec votre commercial. Les produits non disponibles (N.DISP) restent commandables, sous réserve de réapprovisionnement.</p>
+<section id="hist" aria-label="Historique des bons de commande">
+  <div id="hlogin" class="lg"><b>Accès confidentiel aux bons</b>
+   <div class="chips"><button class="chip" id="lp" aria-pressed="true">Pharmacien</button><button class="chip" id="ld" aria-pressed="false">Délégué</button></div>
+   <div id="lpf" class="lg" style="border:0;padding:0"><label class="f">Nom du pharmacien<input type="text" id="lph" autocomplete="off"></label><label class="f">Pharmacie<input type="text" id="lcl" autocomplete="off"></label><label class="f">Code personnel<input type="password" inputmode="numeric" id="lpin" autocomplete="off"></label></div>
+   <div id="ldf" hidden><label class="f"><span id="ldl"></span><input type="password" inputmode="numeric" id="ldpin" autocomplete="off"></label></div>
+   <button class="btn" id="lgo" style="background:var(--teal)">Ouvrir mes bons</button><div id="lerr"></div></div>
+  <div id="hmain" hidden>
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><b id="hwho"></b><button class="chip" id="lock">Verrouiller</button></div>
+  <div class="hbar"><input type="search" id="hs" placeholder="Rechercher un pharmacien, une pharmacie, une référence…" aria-label="Rechercher"><select id="hp" aria-label="Pharmacien"></select></div>
+  <div class="chips" style="margin-bottom:10px"><button class="chip" data-hf="all" aria-pressed="true">Tous</button><button class="chip" data-hf="En préparation" aria-pressed="false">En préparation</button><button class="chip" data-hf="Livré" aria-pressed="false">Livré</button></div>
+  <div id="hl"></div>
+  <p class="note">Chaque pharmacien ne voit que ses propres bons. Les bons restent sur cet appareil ; un bon signé ne peut être ni modifié ni supprimé, seul son état change.</p>
+  </div>
+ </section>
+</main>
+<div class="foot">
+ <div class="t"><span id="cnt">0 produit</span><b id="tot">0,00 DA</b></div>
+ <div class="acts">
+  <button class="btn g" id="reset">Vider</button>
+  <button class="btn g" id="copy">Copier</button>
+  
+  <button class="btn" id="sign">Valider et signer</button>
+ </div>
+</div>
+<div id="toast" role="status"></div>
+<dialog id="dlg"><h2 style="margin:0 0 6px;font-size:16px">Légaliser le bon de commande</h2><div id="dsum" style="font-size:13px"></div>
+ <p style="font-size:12px;color:var(--mute);margin:10px 0 0">Signez avec le doigt ou la souris :</p><canvas id="cv" width="360" height="140"></canvas>
+ <label class="f" style="margin-top:8px">Code personnel du pharmacien<input type="password" inputmode="numeric" id="pin" autocomplete="off"></label><div id="pinh" style="font-size:11px;color:var(--mute)"></div>
+ <label class="chk"><input type="checkbox" id="ok"><span>Je certifie l’exactitude de cette commande et je m’engage à la faire honorer auprès du grossiste.</span></label><div id="derr"></div>
+ <div class="dact"><button class="btn g" id="clr">Effacer</button><button class="btn g" id="cancel">Annuler</button><button class="btn" id="go">Signer et enregistrer</button></div></dialog>
+<dialog id="done"><h2 style="margin:0 0 6px;font-size:16px">Bon signé et enregistré</h2><p style="font-size:13px">Référence : <b id="dref"></b></p><div class="dact" style="flex-wrap:wrap;justify-content:flex-start"><button class="btn" id="dpdf">Télécharger le PDF</button><button class="btn" id="dpr">Imprimer</button><button class="btn" id="dsh">Envoyer</button><button class="btn g" id="dcl">Fermer</button></div></dialog>
+<dialog id="sh"><h2 style="margin:0 0 8px;font-size:16px">Envoyer l’interface aux pharmaciens</h2>
+ <label class="f">Lien de l’interface<input type="text" id="url"></label><label class="f" style="margin-top:8px">Message<textarea id="msg" rows="5"></textarea></label>
+ <div class="shr"><a class="btn" id="wa" target="_blank" rel="noopener">WhatsApp</a><a class="btn" id="sms">SMS</a><a class="btn" id="ml">E-mail</a><button class="btn" id="cp">Copier</button><button class="btn" id="ns">Partager…</button></div>
+ <p class="note">Avant l’envoi : ouvrez la page de cette interface dans Claude et activez le partage du lien (bouton Partager), sinon les pharmaciens ne pourront pas l’ouvrir. Chaque pharmacien garde ses bons sur son propre appareil.</p>
+ <div class="dact"><button class="btn g" id="shc">Fermer</button></div></dialog>
+<div id="sheet"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+<script>
+const P=[
+[1,"SOLIMAG BIGLYCINATE GÉLULES 300MG B/30","Bisglycinate 300mg",742.42,816.67,980,"12/2028",50,80,1],
+[2,"VIAVIT C 500MG GEL B/30","Acide ascorbique 500mg",331.03,364.14,540,"02/2029",50,80,0],
+[3,"DOLIVIT CPR B/30","Vitamines + Minéraux",477.46,525.21,750,"12/2028",54,80,0],
+[4,"BETAFER CPR B/30","Fer bisglycinate, chélate cuivre - zinc",381.97,420.17,600,"01/2028",48,80,0],
+[5,"BETAMAG CPR B/30","Magnésium + Vitamine",413.18,455.18,650,"11/2028",54,80,0],
+[6,"OSTIFLEX CPR À CROQUER B/60","Vitamine",736.93,840.33,1200,"1/2/2028",60,80,0],
+[7,"GRIPAMOX SACHET MONODOSE 5G B/7","",541.12,595.23,850,"03/2027",32,50,1],
+[8,"DOLIREX PDE T/50G","",305.57,336.13,480,"05/2027",69,80,1],
+[9,"TORALEX %100 NATUREL SIROP","",375.60,413.16,590,"11/2028",50,80,1],
+[10,"FORSAVIT JUNIOR FL/100ML","",496.56,546.22,780,"09/2027",49,80,1],
+[11,"BETA-D 000 50 UI VITAMINE D3 CP B/10","Cholécalciférol",413.80,455.18,650,"06/2028",54,30,0],
+[12,"BETA-B 1000 µg VITAMINE B12 CP B/10","Vitamine",301.51,331.66,398,"10/2029",54,100,1],
+[13,"MADOLYSE 10MG/2MG CP à sucer B/30 (lysozyme/papayer)","Lysozyme 10mg, papayer 02mg",509.29,560.22,800,"03/2028",54,40,0],
+[14,"COLLUDOLL SPRAY 30ML","",235.54,259.10,370,"08/2028",70,80,0],
+[15,"ORADENT Bain de bouche FL 100 ML","",159.15,175.07,250,"02/2028",55,80,0],
+[16,"EAU OXYGÉNÉE SPRAY 10 VOLUMES FL/50ML THERAPLOS","Antiseptique",78.45,90.22,120,"12/2027",23,40,0],
+[17,"ÉOSINE AQUEUSE %2 SPRAY FL/50ML THERAPLOS","Antiseptique",78.45,90.22,120,"12/2027",23,40,0],
+[18,"BLEU DE MÉTHYLÈNE SPRAY FL/50ML THERAPLOS","Antiseptique",78.45,90.22,120,"01/2028",23,40,1],
+[19,"DELASPRAY POVIDONE IODÉE %10 SPRAY","Antiseptique",98.07,112.78,150,"03/2029",23,10,1]
+].map(a=>({n:a[0],d:a[1],dci:a[2],pa:a[3],pv:a[4],ppa:a[5],ddp:a[6],colis:a[7],ug:a[8],disp:a[9]}));
+let Q={},F="all",S="";
+const KEY="theraplos-cmd-v2",$=id=>document.getElementById(id);
+const fm=n=>n.toLocaleString("fr-FR",{minimumFractionDigits:2,maximumFractionDigits:2})+" DA";
+const ugq=p=>Math.floor((Q[p.n]||0)*p.ug/100);
+function save(){try{localStorage.setItem(KEY,JSON.stringify({Q,c:[client.value,region.value,tel.value,comm.value,dtel.value,gros.value,gtel.value,ph.value]}))}catch(e){}}
+function load(){try{const d=JSON.parse(localStorage.getItem(KEY)||"null");if(d){Q=d.Q||{};{const c=d.c||[];client.value=c[0]||"";region.value=c[1]||"";tel.value=c[2]||"";comm.value=c[3]||comm.value;dtel.value=c[4]||dtel.value;gros.value=c[5]||"";gtel.value=c[6]||"";ph.value=c[7]||""}}}catch(e){}}
+function set(n,v){v=Math.max(0,Math.min(9999,parseInt(v)||0));if(v)Q[n]=v;else delete Q[n];save();draw(true)}
+function draw(keep){
+ const l=$("list"),act=document.activeElement,id=act&&act.dataset&&act.dataset.q;
+ const rows=P.filter(p=>(F==="all"||(F==="D"&&p.disp)||(F==="sel"&&Q[p.n]))&&(p.d+" "+p.dci).toLowerCase().includes(S));
+ l.innerHTML=rows.length?rows.map(p=>{const q=Q[p.n]||0,g=ugq(p);return `<article class="item${q?" on":""}">
+ <div><div class="name">${p.n}. ${p.d}<span class="tag ${p.disp?"d":"n"}">${p.disp?"DISP":"N.DISP"}</span></div>${p.dci?`<div class="dci">${p.dci}</div>`:""}</div>
+ <div class="q"><button data-m="${p.n}" aria-label="Retirer une boîte">−</button><input type="number" inputmode="numeric" min="0" data-q="${p.n}" value="${q||""}" placeholder="0" aria-label="Quantité ${p.d}"><button data-p="${p.n}" aria-label="Ajouter une boîte">+</button></div>
+ <div class="meta"><span>PPA <b>${fm(p.ppa)}</b></span><span>Achat <b>${fm(p.pa)}</b></span><span>Vente <b>${fm(p.pv)}</b></span><span>DDP <b>${p.ddp}</b></span><span>Colis <b>${p.colis}</b></span><span>UG <span class="ug">${p.ug}%</span></span></div>
+ ${q?`<div class="free">${fm(q*p.pa)} · ${g?`dont environ ${g} unité${g>1?"s":""} gratuite${g>1?"s":""} (UG)`:"UG : quantité trop faible"}</div>`:""}</article>`}).join(""):`<div class="empty">Aucun produit ne correspond. Modifiez la recherche ou le filtre.</div>`;
+ const ks=Object.keys(Q),tot=ks.reduce((s,k)=>s+Q[k]*P[k-1].pa,0),u=ks.reduce((s,k)=>s+Q[k],0);
+ $("cnt").textContent=`${ks.length} produit${ks.length>1?"s":""} · ${u} unité${u>1?"s":""}`;$("tot").textContent=fm(tot)+" (achat)";
+ if(keep&&id){const e=l.querySelector(`[data-q="${id}"]`);if(e){e.focus();const v=e.value;e.value="";e.value=v}}
+}
+$("list").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;if(b.dataset.p)set(b.dataset.p,(Q[b.dataset.p]||0)+1);if(b.dataset.m)set(b.dataset.m,(Q[b.dataset.m]||0)-1)});
+$("list").addEventListener("change",e=>{if(e.target.dataset.q)set(e.target.dataset.q,e.target.value)});
+$("s").addEventListener("input",e=>{S=e.target.value.toLowerCase();draw()});
+document.querySelectorAll(".chip").forEach(c=>c.onclick=()=>{F=c.dataset.f;document.querySelectorAll(".chip").forEach(x=>x.setAttribute("aria-pressed",x===c));draw()});
+["client","region","tel","comm","dtel","gros","gtel","ph"].forEach(i=>$(i).addEventListener("input",save));
+$("reset").onclick=()=>{if(Object.keys(Q).length&&!confirm("Vider toutes les quantités ?"))return;Q={};save();draw()};
+function summary(){const ks=Object.keys(Q).map(Number).sort((a,b)=>a-b);
+ return `BON DE COMMANDE THERAPLOS – PHARMACIE\nClient : ${client.value}\nRégion : ${region.value}\nTél : ${tel.value}\nCommercial : ${comm.value} - Tél : ${dtel.value}\nGrossiste : ${gros.value} - Tél : ${gtel.value}\nDate : ${dt.value.split("-").reverse().join("/")}\n\n`+ks.map(k=>`${k}. ${P[k-1].d} — QTE : ${Q[k]}`).join("\n")+`\n\nTotal achat : ${$("tot").textContent}`}
+$("copy").onclick=async()=>{const b=$("copy");try{await navigator.clipboard.writeText(summary());b.textContent="Copié"}catch(e){b.textContent="Copie impossible"}setTimeout(()=>b.textContent="Copier",1800)};
+
+const HK="theraplos-hist-v1";let H=[];
+try{H=JSON.parse(localStorage.getItem(HK)||"[]")}catch(e){}
+const hsave=()=>{try{localStorage.setItem(HK,JSON.stringify(H))}catch(e){}};
+const D2=v=>v?v.split("-").reverse().join("/"):"";
+const TS=i=>new Date(i).toLocaleString("fr-FR").replace(/[\u202f\u00a0]/g," ");
+const esc=t=>String(t==null?"":t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const pf=n=>n.toLocaleString("fr-FR",{minimumFractionDigits:2,maximumFractionDigits:2}).replace(/[\u202f\u00a0]/g," ");
+const otot=o=>o.items.reduce((s,[n,q])=>s+q*P[n-1].pa,0);
+const canon=o=>JSON.stringify({v:1,ph:o.ph,client:o.client,region:o.region,tel:o.tel,comm:o.comm,dtel:o.dtel,gros:o.gros,gtel:o.gtel,date:o.date,items:o.items,ts:o.ts,nonce:o.nonce,sig:o.sig});
+async function sha(t){const b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(t));return[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("")}
+let tt;function flash(t){const e=$("toast");e.textContent=t;e.classList.add("on");clearTimeout(tt);tt=setTimeout(()=>e.classList.remove("on"),3500)}
+function setTab(h){if(!h)lock();document.body.classList.toggle("h",h);$("t1").setAttribute("aria-pressed",!h);$("t2").setAttribute("aria-pressed",h);window.scrollTo(0,0)}
+$("t1").onclick=()=>setTab(false);$("t2").onclick=()=>{hdraw();setTab(true)};
+
+function makePdf(o){
+ const {jsPDF}=window.jspdf,doc=new jsPDF({unit:"mm",format:"a4"}),NV=[27,42,90],TL=[60,192,155],Qm={};o.items.forEach(([n,q])=>Qm[n]=q);
+ doc.setFillColor(...TL);doc.lines([[126,0],[-34,8,-102,26,-126,58]],0,0,[1,1],"F",true);
+ doc.setFillColor(...NV);doc.lines([[112,0],[-28,6,-84,20,-112,46]],0,0,[1,1],"F",true);
+ doc.lines([[-108,0],[30,-3,86,-12,108,-44]],210,297,[1,1],"F",true);
+ doc.setFillColor(255,255,255);doc.roundedRect(9,10,66,20,8,8,"F");
+ doc.setFillColor(...NV);doc.roundedRect(14,14,5,10,1,1,"F");doc.setFillColor(...TL);doc.rect(19,16,4.5,4.5,"F");
+ doc.setFont("helvetica","bold");doc.setFontSize(13);doc.setTextColor(...NV);doc.text("THERAPLOS",25.5,21.5);
+ doc.setFontSize(4.5);doc.setTextColor(...TL);doc.text("LABORATOIRES",26,25.5);
+ const rows=[["Client :",o.client],["Pharmacien :",o.ph],["Région :",o.region],["Tel :",o.tel],["Commercial :",o.comm],["Tél commercial :",o.dtel],["Grossiste :",o.gros],["Tél grossiste :",o.gtel],["Date du bon :",D2(o.date)],["Réf. :",o.ref]];
+ doc.setLineWidth(.2);doc.setDrawColor(60);
+ rows.forEach((r,i)=>{const y=9+i*4.6;doc.setFontSize(7.5);doc.setFont("helvetica","normal");doc.setTextColor(30,40,80);doc.text(r[0],126,y);
+  doc.setFont("helvetica","bold");let fs=7.5;doc.setFontSize(fs);while(doc.getTextWidth(r[1]||"")>49&&fs>5){fs-=.5;doc.setFontSize(fs)}
+  doc.text(r[1]||"",151,y);doc.line(149,y+1,201,y+1)});
+ doc.setFont("helvetica","bold");doc.setFontSize(10);doc.setTextColor(20,25,50);
+ doc.text("Producteur et Distributeur De Produits Pharmaceutiques Et Parapharmaceutiques",105,58,{align:"center"});
+ doc.setFont("helvetica","normal");doc.setFontSize(9.5);
+ doc.text("Adresse: Zone Industrielle le Rhumel N° 328 - Constantine- ALGERIE",105,63.5,{align:"center"});
+ doc.setFillColor(...NV);doc.roundedRect(8,67,194,6,3,3,"F");doc.setTextColor(255);doc.setFontSize(6.5);
+ doc.text("Tel : 213.31.66.85.86 / 66 . 03. 91",26,71.1);doc.text("Fax : 213.31.66.95.86",96,71.1);doc.text("Email:theraploslaboratoire@gmail.com",196,71.1,{align:"right"});
+ doc.setDrawColor(...TL);doc.setLineWidth(.7);doc.roundedRect(38,78,134,12,4,4,"S");
+ doc.setFont("helvetica","bold");doc.setFontSize(13);
+ const t1="LISTING LABORATOIRE THERAPLOS - ",t2="PHARMACIE",x0=105-(doc.getTextWidth(t1)+doc.getTextWidth(t2))/2;
+ doc.setTextColor(...NV);doc.text(t1,x0,86);doc.setTextColor(...TL);doc.text(t2,x0+doc.getTextWidth(t1),86);
+ doc.autoTable({startY:95,margin:{left:10,right:10},theme:"grid",
+  styles:{fontSize:6.5,fontStyle:"bold",cellPadding:1.3,textColor:[15,20,40],lineColor:[0,0,0],lineWidth:.2,valign:"middle"},
+  headStyles:{fillColor:NV,textColor:255,halign:"center"},
+  head:[["N°","DESIGNATION","DCI","P.ACHAT","P.VENT","PPA","D.D.P","COLIS","UG","DISP","QTE"]],
+  body:P.map(p=>[p.n,p.d,p.dci,pf(p.pa),pf(p.pv),pf(p.ppa),p.ddp,p.colis,p.ug+"%",p.disp?"DISP":"N.DISP",Qm[p.n]||""]),
+  columnStyles:{0:{cellWidth:7,halign:"center",fontSize:8},1:{cellWidth:46},2:{cellWidth:27,halign:"center",fontSize:5.5},3:{cellWidth:15,halign:"center"},4:{cellWidth:15,halign:"center"},5:{cellWidth:14,halign:"center"},6:{cellWidth:13,halign:"center"},7:{cellWidth:10,halign:"center"},8:{cellWidth:10,halign:"center",textColor:[214,40,58]},9:{cellWidth:13,halign:"center"},10:{cellWidth:20,halign:"center",fontSize:9}},
+  didParseCell:h=>{if(h.section==="body"&&Qm[P[h.row.index].n])h.cell.styles.fillColor=[225,245,238]}});
+ let y=doc.lastAutoTable.finalY+6;const u=o.items.reduce((s,i)=>s+i[1],0);
+ if(y>238){doc.addPage();y=20}
+ doc.setFont("helvetica","bold");doc.setFontSize(9);doc.setTextColor(...NV);
+ doc.text(o.items.length+" produit(s) - "+u+" unité(s)   |   Total achat : "+pf(otot(o))+" DA",10,y);
+ doc.setFont("helvetica","normal");doc.setFontSize(8);
+ doc.text("Délégué Médico-Pharmaceutique : "+o.comm+"  -  Tél : "+o.dtel,10,y+5.5);
+ doc.text("Grossiste : "+(o.gros||"")+(o.gtel?"  -  Tél : "+o.gtel:"")+"   |   Bon réalisé le "+D2(o.date),10,y+10.5);
+ y+=15;doc.setDrawColor(...TL);doc.setLineWidth(.5);doc.roundedRect(10,y,130,35,2,2,"S");
+ doc.setFont("helvetica","bold");doc.setFontSize(8);doc.setTextColor(...NV);doc.text("BON LÉGALISÉ - SIGNATURE NUMÉRIQUE DU PHARMACIEN",13,y+5);
+ if(o.sig)doc.addImage(o.sig,"PNG",13,y+8,42,17);
+ doc.setFont("helvetica","normal");doc.setFontSize(7);doc.setTextColor(30,40,80);
+ doc.text(["Signé par : "+o.ph,"Pharmacie : "+o.client,"Le "+TS(o.ts),"Réf. : "+o.ref],60,y+10);
+ doc.setFont("courier","normal");doc.setFontSize(5.8);
+ doc.text("SHA-256 : "+o.hash.slice(0,32),13,y+29);doc.text("          "+o.hash.slice(32),13,y+32);
+ return doc}
+async function saveFile(name,data){
+ if(window.claude){let dl=null;try{dl=await claude.use("downloads")}catch(e){}
+  if(!dl)throw {code:"unavailable"};await dl.save({filename:name,data});return}
+ const b=data instanceof Blob?data:new Blob([data],{type:name.endsWith(".pdf")?"application/pdf":"text/html"}),a=document.createElement("a");
+ a.href=URL.createObjectURL(b);a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{a.remove();URL.revokeObjectURL(a.href)},3000)}
+async function dlpdf(o){
+ if(!window.jspdf){flash("Bibliothèque PDF non chargée : vérifiez la connexion Internet.");return}
+ try{await saveFile("bon-"+o.ref+".pdf",makePdf(o).output("arraybuffer"));flash("PDF enregistré")}
+ catch(e){if(!e||e.code!=="declined")flash("Échec du téléchargement")}}
+
+const dlg=$("dlg"),cv=$("cv"),cx=cv.getContext("2d");let drawn=false,pen=false;
+cx.lineWidth=2.4;cx.lineCap="round";cx.lineJoin="round";cx.strokeStyle="#0a1030";
+const pos=e=>{const r=cv.getBoundingClientRect();return[(e.clientX-r.left)*cv.width/r.width,(e.clientY-r.top)*cv.height/r.height]};
+cv.addEventListener("pointerdown",e=>{pen=true;drawn=true;cv.setPointerCapture(e.pointerId);const[x,y]=pos(e);cx.beginPath();cx.moveTo(x,y);cx.lineTo(x+.1,y);cx.stroke()});
+cv.addEventListener("pointermove",e=>{if(!pen)return;const[x,y]=pos(e);cx.lineTo(x,y);cx.stroke()});
+["pointerup","pointercancel"].forEach(t=>cv.addEventListener(t,()=>pen=false));
+const clr=()=>{cx.clearRect(0,0,cv.width,cv.height);drawn=false};
+$("clr").onclick=clr;$("cancel").onclick=()=>dlg.close();
+$("sign").onclick=()=>{
+ const ks=Object.keys(Q);
+ if(!ks.length)return flash("Saisissez au moins une quantité");
+ if(!ph.value.trim()||!client.value.trim())return flash("Renseignez le nom du pharmacien et de la pharmacie (Client)");
+ $("dsum").innerHTML=`<b>${esc(ph.value)}</b> – ${esc(client.value)}<br>${ks.length} produit(s) · ${fm(ks.reduce((s,k)=>s+Q[k]*P[k-1].pa,0))} (achat)`;
+ clr();$("ok").checked=false;$("derr").textContent="";$("pin").value="";$("pinh").textContent=lget(PK,{})[pkOf(ph.value,client.value)]?"Saisissez votre code personnel.":"Premier bon : choisissez un code personnel (4 chiffres minimum). Il protège la consultation de vos bons.";dlg.showModal()};
+$("go").onclick=async()=>{
+ if(!drawn||!$("ok").checked){$("derr").textContent="Signez dans le cadre et cochez la case de certification.";return}
+ const pk=pkOf(ph.value,client.value),PR=lget(PK,{}),pin=$("pin").value;
+ if(PR[pk]){if(!await okPin(PR[pk],pin)){$("derr").textContent="Code personnel incorrect.";return}}
+ else{if(!/^\d{4,}$/.test(pin)){$("derr").textContent="Choisissez un code de 4 chiffres minimum.";return}PR[pk]=await mk(pin);lset(PK,PR)}
+ const o={ph:ph.value.trim(),client:client.value.trim(),region:region.value,tel:tel.value,comm:comm.value,dtel:dtel.value,gros:gros.value,gtel:gtel.value,date:dt.value,
+  items:Object.keys(Q).map(Number).sort((a,b)=>a-b).map(n=>[n,Q[n]]),ts:new Date().toISOString(),
+  nonce:[...crypto.getRandomValues(new Uint8Array(8))].map(x=>x.toString(16).padStart(2,"0")).join(""),sig:cv.toDataURL("image/png")};
+ o.pk=pk;o.hash=await sha(canon(o));o.ref="TH-"+o.date.replace(/-/g,"")+"-"+o.hash.slice(0,8).toUpperCase();
+ o.status="En préparation";o.log=[[o.status,o.ts]];
+ H.unshift(o);hsave();dlg.close();Q={};save();draw();LAST=o;$("dref").textContent=o.ref;$("done").showModal()};
+
+const PK="theraplos-prof-v1",DK="theraplos-deleg-v1";
+const lget=(k,d)=>{try{return JSON.parse(localStorage.getItem(k)||"null")||d}catch(e){return d}};
+const lset=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+const nz=t=>String(t||"").trim().toLowerCase().replace(/\s+/g," ");
+const pkOf=(a,b)=>nz(a)+"|"+nz(b);
+async function mk(pin){const s=[...crypto.getRandomValues(new Uint8Array(8))].map(x=>x.toString(16).padStart(2,"0")).join("");return{s,h:await sha(s+pin)}}
+const okPin=async(r,pin)=>!!r&&await sha(r.s+pin)===r.h;
+let AUTH=null,lockT,HS="",HF="all",HP="",LAST=null,LM="ph";
+function lock(){AUTH=null;clearTimeout(lockT)}
+function unlock(a){AUTH=a;clearTimeout(lockT);lockT=setTimeout(()=>{lock();hdraw()},300000)}
+const own=o=>!!AUTH&&(AUTH.role==="de"||(o.pk||pkOf(o.ph,o.client))===AUTH.pk);
+function lm(m){LM=m;$("lp").setAttribute("aria-pressed",m==="ph");$("ld").setAttribute("aria-pressed",m==="de");$("lpf").hidden=m!=="ph";$("ldf").hidden=m!=="de";$("lerr").textContent="";
+ const has=!!lget(DK,null);$("ldl").textContent=has?"Code délégué":"Créez votre code délégué (4 chiffres minimum) avant de remettre l’appareil aux pharmaciens";
+ $("lgo").textContent=m==="ph"?"Ouvrir mes bons":(has?"Ouvrir tous les bons":"Créer le code et ouvrir")}
+$("lp").onclick=()=>lm("ph");$("ld").onclick=()=>lm("de");
+$("lgo").onclick=async()=>{const e=$("lerr");e.textContent="";
+ if(LM==="ph"){const r=lget(PK,{})[pkOf($("lph").value,$("lcl").value)];
+  if(!await okPin(r,$("lpin").value)){e.textContent="Identifiants incorrects.";return}
+  unlock({role:"ph",pk:pkOf($("lph").value,$("lcl").value)})}
+ else{const pin=$("ldpin").value,d=lget(DK,null);
+  if(d){if(!await okPin(d,pin)){e.textContent="Code incorrect.";return}}
+  else{if(!/^\d{4,}$/.test(pin)){e.textContent="Code : 4 chiffres minimum.";return}lset(DK,await mk(pin))}
+  unlock({role:"de"})}
+ ["lpin","ldpin","lph","lcl"].forEach(i=>$(i).value="");hdraw()};
+$("lock").onclick=()=>{lock();hdraw()};
+
+function sheetHtml(o){const Qm={};o.items.forEach(([n,q])=>Qm[n]=q);const u=o.items.reduce((s,i)=>s+i[1],0);
+ const f=(l,v)=>`<div><span>${l}</span> <b>${esc(v)}</b></div>`;
+ return `<div class="hd"><div><b class="lg1">THERAPLOS</b> <small>LABORATOIRES</small></div><div class="sm">Producteur et Distributeur De Produits Pharmaceutiques Et Parapharmaceutiques<br>Zone Industrielle le Rhumel N° 328 - Constantine - ALGERIE · Tel : 213.31.66.85.86 / 66 . 03. 91 · Fax : 213.31.66.95.86 · theraploslaboratoire@gmail.com</div></div>
+ <h2>LISTING LABORATOIRE THERAPLOS - <span>PHARMACIE</span></h2>
+ <div class="gr">${f("Client :",o.client)}${f("Pharmacien :",o.ph)}${f("Région :",o.region)}${f("Tel :",o.tel)}${f("Commercial :",o.comm)}${f("Tél commercial :",o.dtel)}${f("Grossiste :",o.gros)}${f("Tél grossiste :",o.gtel)}${f("Date du bon :",D2(o.date))}${f("Réf. :",o.ref)}</div>
+ <table><tr>${["N°","DESIGNATION","DCI","P.ACHAT","P.VENT","PPA","D.D.P","COLIS","UG","DISP","QTE"].map(h=>`<th>${h}</th>`).join("")}</tr>${P.map(p=>`<tr class="${Qm[p.n]?"q":""}"><td>${p.n}</td><td class="l">${esc(p.d)}</td><td>${esc(p.dci)}</td><td>${pf(p.pa)}</td><td>${pf(p.pv)}</td><td>${pf(p.ppa)}</td><td>${p.ddp}</td><td>${p.colis}</td><td class="ug">${p.ug}%</td><td>${p.disp?"DISP":"N.DISP"}</td><td class="qt">${Qm[p.n]||""}</td></tr>`).join("")}</table>
+ <p class="tt">${o.items.length} produit(s) - ${u} unité(s) | Total achat : ${pf(otot(o))} DA</p>
+ <div class="sg"><img src="${o.sig}" alt="Signature"><div><b>BON LÉGALISÉ - SIGNATURE NUMÉRIQUE DU PHARMACIEN</b><br>Signé par : ${esc(o.ph)} (${esc(o.client)})<br>Le ${TS(o.ts)}<br>Réf. : ${esc(o.ref)}<br><span class="hs">SHA-256 : ${esc(o.hash)}</span></div></div>`}
+const PCSS=`@page{size:A4;margin:8mm}*{box-sizing:border-box}body{font:8.5px Arial,Helvetica,sans-serif;color:#111;margin:0 auto;max-width:800px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+table{width:100%;border-collapse:collapse}td,th{border:1px solid #000;padding:2px 3px;text-align:center;font-weight:600}th{background:#1b2a5a;color:#fff;font-size:7.5px}td.l{text-align:left}
+.hd{background:#1b2a5a;color:#fff;padding:8px 12px;border-bottom:4px solid #3cc09b;border-radius:0 0 0 24px}.lg1{font-size:18px}small{color:#3cc09b;font-size:8px}.sm{font-size:8px;margin-top:3px}
+h2{margin:8px auto;border:1.5px solid #3cc09b;border-radius:10px;padding:5px;text-align:center;font-size:13px;color:#1b2a5a;width:80%}h2 span{color:#3cc09b}
+.gr{display:grid;grid-template-columns:1fr 1fr;gap:1px 16px;margin:6px 0}.gr span{color:#555}tr.q td{background:#e1f5ee}.ug{color:#d6283a}.qt{font-size:11px}
+.tt{font-weight:700;color:#1b2a5a;font-size:10px;margin:6px 0}.sg{display:flex;gap:12px;border:1.5px solid #3cc09b;border-radius:6px;padding:6px;align-items:center;width:fit-content;max-width:100%}
+.sg img{height:60px}.hs{font:7px monospace;word-break:break-all}`;
+async function printFile(o){
+ const html=`<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><title>Bon ${esc(o.ref)}</title><style>${PCSS}</style></head><body>${sheetHtml(o)}<script>addEventListener("load",function(){setTimeout(function(){print()},500)})<\/script></body></html>`;
+ try{await saveFile("bon-"+o.ref+"-impression.html",html);flash("Fichier enregistré : ouvrez-le, la fenêtre d’impression s’ouvre automatiquement.")}
+ catch(e){if(!e||e.code!=="declined")flash("Échec : téléchargez le PDF puis imprimez-le.")}}
+function printOrder(o){$("sheet").innerHTML=sheetHtml(o);let fired=false;const f=()=>{fired=true};addEventListener("beforeprint",f,{once:true});
+ setTimeout(()=>{try{window.print()}catch(e){}setTimeout(()=>{removeEventListener("beforeprint",f);if(!fired)printFile(o)},900)},200)}
+async function shareOrder(o){try{const f=new File([makePdf(o).output("blob")],"bon-"+o.ref+".pdf",{type:"application/pdf"});
+ if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f],title:"Bon de commande "+o.ref});return}}catch(e){if(e&&e.name==="AbortError")return}
+ flash("Partage indisponible ici : téléchargez le PDF puis envoyez-le.")}
+$("dpdf").onclick=()=>dlpdf(LAST);$("dpr").onclick=()=>{$("done").close();printOrder(LAST)};$("dsh").onclick=()=>shareOrder(LAST);$("dcl").onclick=()=>$("done").close();
+
+function hdraw(){
+ const L=!AUTH;$("hlogin").hidden=!L;$("hmain").hidden=L;
+ if(L){lm(LM);return}
+ const de=AUTH.role==="de",mine=H.filter(own);
+ $("hwho").textContent=(de?"Tous les bons":"Mes bons")+" ("+mine.length+")";
+ const sp=$("hp");sp.hidden=!de;
+ if(de)sp.innerHTML='<option value="">Tous les pharmaciens</option>'+[...new Set(mine.map(o=>o.ph))].sort().map(n=>`<option${n===HP?" selected":""}>${esc(n)}</option>`).join("");
+ const rows=mine.filter(o=>(!de||!HP||o.ph===HP)&&(HF==="all"||o.status===HF)&&(o.ph+" "+o.client+" "+o.ref).toLowerCase().includes(HS));
+ $("hl").innerHTML=rows.length?rows.map(o=>{const i=H.indexOf(o);return `<article class="item${o.status==="Livré"?" on":""}">
+ <div><div class="name">${esc(o.ph)}</div><div class="dci">${esc(o.client)} · bon du ${D2(o.date)}</div></div>
+ <select data-st="${i}" aria-label="État du bon ${esc(o.ref)}">${["En préparation","Livré"].map(s=>`<option${s===o.status?" selected":""}>${s}</option>`).join("")}</select>
+ <div class="meta"><span>Réf <b>${esc(o.ref)}</b></span><span>${o.items.length} produit(s)</span><span>Total <b>${fm(otot(o))}</b></span><span>Grossiste <b>${esc(o.gros||"-")}</b></span></div>
+ <div class="free">${o.log.map(l=>l[0]+" : "+TS(l[1])).join("  →  ")}</div>
+ <div class="meta"><button class="chip" data-pdf="${i}">Télécharger le PDF</button><button class="chip" data-pr="${i}">Imprimer</button><button class="chip" data-sh="${i}">Envoyer</button><button class="chip" data-chk="${i}">Vérifier l’intégrité</button><button class="chip" data-re="${i}">Refaire une commande</button></div></article>`}).join(""):`<div class="empty">Aucun bon pour ce filtre.</div>`}
+$("hs").addEventListener("input",e=>{HS=e.target.value.toLowerCase();hdraw()});
+$("hp").addEventListener("change",e=>{HP=e.target.value;hdraw()});
+document.querySelectorAll("[data-hf]").forEach(c=>c.onclick=()=>{HF=c.dataset.hf;document.querySelectorAll("[data-hf]").forEach(x=>x.setAttribute("aria-pressed",x===c));hdraw()});
+const getO=i=>{const o=H[i];return o&&own(o)?o:null};
+$("hl").addEventListener("change",e=>{const o=getO(e.target.dataset.st);if(!o)return;o.status=e.target.value;o.log.push([o.status,new Date().toISOString()]);hsave();hdraw()});
+$("hl").addEventListener("click",async e=>{const b=e.target.closest("button");if(!b)return;const d=b.dataset,o=getO(d.pdf??d.pr??d.sh??d.chk??d.re);if(!o)return;
+ if(d.pdf!=null)dlpdf(o);if(d.pr!=null)printOrder(o);if(d.sh!=null)shareOrder(o);
+ if(d.chk!=null)flash(await sha(canon(o))===o.hash?"Bon intact : l’empreinte correspond au contenu.":"Alerte : le contenu ne correspond plus à l’empreinte.");
+ if(d.re!=null){client.value=o.client;ph.value=o.ph;region.value=o.region;tel.value=o.tel;gros.value=o.gros;gtel.value=o.gtel;Q={};o.items.forEach(([n,q])=>Q[n]=q);save();draw();setTab(false)}});
+
+const APPU="https://claude.ai/artifact/5u2WHHtCC3TSF2D9sdoibf",$u=$("url"),$m=$("msg");
+const msgT=()=>"Bonjour,\nVoici le bon de commande numérique des Laboratoires Theraplos : saisissez vos quantités, signez et recevez votre bon en PDF.\n"+$u.value+"\n\n"+comm.value+(dtel.value?" - "+dtel.value:"");
+function links(){const t=encodeURIComponent($m.value);$("wa").href="https://wa.me/?text="+t;$("sms").href="sms:?&body="+t;$("ml").href="mailto:?subject="+encodeURIComponent("Bon de commande numérique Theraplos")+"&body="+t}
+$("t3").onclick=()=>{$u.value=lget("theraplos-url",window.claude?APPU:location.href);$m.value=msgT();links();$("sh").showModal()};
+$u.addEventListener("input",()=>{lset("theraplos-url",$u.value);$m.value=msgT();links()});$m.addEventListener("input",links);
+$("cp").onclick=async()=>{try{await navigator.clipboard.writeText($m.value);flash("Message copié")}catch(e){flash("Copie impossible")}};
+$("ns").onclick=async()=>{try{await navigator.share({title:"Bon de commande Theraplos",text:$m.value})}catch(e){if(!e||e.name!=="AbortError")flash("Partage indisponible ici : utilisez WhatsApp, SMS ou e-mail.")}};
+$("shc").onclick=()=>$("sh").close();
+dt.value=new Date(Date.now()-new Date().getTimezoneOffset()*6e4).toISOString().slice(0,10);
+load();draw();hdraw();
+</script>
+</body>
+</html>
